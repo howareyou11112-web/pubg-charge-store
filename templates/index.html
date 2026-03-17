@@ -16,7 +16,118 @@
         body {
             background-color: var(--dark-bg);
             color: white;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, sans-serif;import { useState } from "react";
+import ucCoin from "@/assets/uc-coin.png";
+
+const ucPackages = [
+  { id: 1, amount: "60 UC", price: "1,250 IQD", img: ucCoin },
+  { id: 2, amount: "325 UC", price: "6,500 IQD", img: ucCoin },
+  { id: 3, amount: "660 UC", price: "13,000 IQD", img: ucCoin },
+  { id: 4, amount: "1800 UC", price: "32,500 IQD", img: ucCoin },
+  { id: 5, amount: "3850 UC", price: "65,000 IQD", img: ucCoin },
+  { id: 6, amount: "8100 UC", price: "130,000 IQD", img: ucCoin },
+];
+
+const Index = () => {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [playerId, setPlayerId] = useState("");
+
+  const handleCharge = () => {
+    if (!playerId.trim()) {
+      alert("يرجى إدخال ID اللاعب أولاً!");
+      return;
+    }
+    if (!selectedId) {
+      alert("يرجى اختيار كمية الشحن أولاً!");
+      return;
+    }
+    alert("جاري تحويلك لبوابة الدفع في العراق...");
+  };
+
+  return (
+    <div dir="rtl" className="min-h-screen bg-background text-foreground">
+      <div className="max-w-lg mx-auto px-4 py-6">
+
+        {/* Header */}
+        <header className="text-center py-8">
+          <h1 className="text-4xl font-black text-primary tracking-wide">NSxIRAQ-STOR</h1>
+          <p className="text-muted-foreground mt-2 text-sm">أسرع شحن في العراق 🇮🇶</p>
+        </header>
+
+        {/* Hero Card */}
+        <div className="bg-card border border-border rounded-2xl p-6 mb-6 text-center">
+          <img
+            src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png"
+            alt="PUBG Mobile"
+            className="w-44 mx-auto mb-5 object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/PUBG_MOBILE.png/320px-PUBG_MOBILE.png";
+            }}
+          />
+
+          <div className="text-right">
+            <label className="block text-muted-foreground text-sm mb-2">
+              <i className="fa fa-user ml-1" /> معرف اللاعب (ID)
+            </label>
+            <input
+              type="number"
+              value={playerId}
+              onChange={(e) => setPlayerId(e.target.value)}
+              placeholder="أدخل الـ ID الخاص بك"
+              className="w-full px-4 py-4 bg-input border border-border rounded-xl text-foreground text-lg text-center placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+            />
+          </div>
+        </div>
+
+        {/* UC Section */}
+        <h2 className="text-right text-primary font-bold text-lg mb-4">
+          اختر كمية الشحن المطلوبة:
+        </h2>
+
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {ucPackages.map((pkg) => (
+            <div
+              key={pkg.id}
+              onClick={() => setSelectedId(pkg.id)}
+              className={`bg-card border rounded-xl p-4 cursor-pointer transition-all duration-200 text-center hover:border-primary hover:bg-secondary ${
+                selectedId === pkg.id
+                  ? "border-primary bg-secondary shadow-lg shadow-primary/10"
+                  : "border-border"
+              }`}
+            >
+              <img
+                src={pkg.img}
+                alt="UC"
+                className="w-12 h-12 mx-auto mb-2 object-contain"
+              />
+              <span className="block font-bold text-base text-foreground">{pkg.amount}</span>
+              <span className="text-primary text-sm font-medium">{pkg.price}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Pay Button */}
+        <button
+          onClick={handleCharge}
+          className="w-full bg-primary text-primary-foreground font-black text-xl py-5 rounded-xl hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg shadow-primary/20"
+        >
+          ⚡ اشحن الآن
+        </button>
+
+        {/* Footer */}
+        <footer className="mt-12 pt-6 border-t border-border text-muted-foreground text-xs text-center leading-loose">
+          <p>حقوق النشر © 2026 NSxIRAQ-STOR. جميع الحقوق محفوظة.</p>
+          <p>المتجر رقم 1 في العراق لتزويد خدمات الألعاب الرقمية.</p>
+        </footer>
+
+      </div>
+    </div>
+  );
+};
+
+export default Index;
+
             margin: 0;
             padding: 0;
         }
