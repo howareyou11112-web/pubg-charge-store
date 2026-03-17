@@ -9,26 +9,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #0d0f11; color: white; margin: 0; }
-        .card-shadow { shadow: 0 10px 40px rgba(0,0,0,0.5); }
-        .gradient-border { border: 1px solid rgba(255, 190, 0, 0.2); }
+        .card-shadow { box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4">
 
     <header class="w-full max-w-md text-center py-10">
-        <div class="w-24 h-24 bg-[#ffbe00] rounded-[2rem] mx-auto flex items-center justify-center shadow-[0_0_50px_rgba(255,190,0,0.2)] mb-4 animate-bounce">
+        <div class="w-24 h-24 bg-[#ffbe00] rounded-[2rem] mx-auto flex items-center justify-center shadow-[0_0_50px_rgba(255,190,0,0.2)] mb-4 animate-pulse">
             <span class="text-black text-4xl font-black">NS</span>
         </div>
         <h1 class="text-3xl font-black tracking-tight text-[#ffbe00]">NSxIRAQ-STOR</h1>
-        <p class="text-gray-400 text-sm mt-2 font-bold italic">Top-up Solutions for Iraqi Gamers</p>
+        <p class="text-gray-400 text-sm mt-2 font-bold">متجرك الرسمي في العراق</p>
     </header>
 
     <main class="w-full max-w-md bg-[#16181c] border border-white/5 rounded-[2.5rem] p-8 card-shadow">
         
         <div class="mb-8">
             <label class="block text-[10px] font-bold text-gray-500 mb-3 uppercase tracking-widest mr-2">Player ID | معرف اللاعب</label>
-            <input type="number" id="p_id" placeholder="57546547547" 
-                class="w-full bg-[#1e2124] border border-[#2d3135] rounded-2xl py-5 px-6 text-white focus:outline-none focus:border-[#ffbe00] transition-all font-mono text-xl text-center">
+            <div class="relative">
+                <input type="number" id="p_id" placeholder="57546547547" 
+                    class="w-full bg-[#1e2124] border border-[#2d3135] rounded-2xl py-5 px-6 text-white focus:outline-none focus:border-[#ffbe00] transition-all font-bold text-center text-xl">
+            </div>
         </div>
 
         <div class="mb-8">
@@ -38,50 +40,54 @@
         </div>
 
         <button onclick="sendOrder()" class="w-full bg-[#ffbe00] hover:bg-[#e6ab00] text-black font-black py-5 rounded-2xl transition-all transform active:scale-95 shadow-xl flex items-center justify-center gap-3">
-            <span class="text-lg">إرسال الطلب للمراجعة</span>
+            <span class="text-lg">إتمام الطلب عبر واتساب</span>
             <i class="fab fa-whatsapp text-2xl"></i>
         </button>
     </main>
 
     <footer class="w-full max-w-md mt-12 mb-12">
         <div class="p-8 bg-[#16181c]/50 rounded-[2.5rem] border border-white/5 text-center">
-            <p class="text-gray-500 text-[10px] mb-6 uppercase tracking-widest font-bold">الموزع المعتمد لوسائل الدفع</p>
-            <div class="flex justify-center gap-10 grayscale opacity-40">
-                <img src="https://i.ibb.co/h7rR3Xf/zain-cash.png" class="h-8" alt="Zain">
-                <img src="https://i.ibb.co/Qv4vG0Y/asiacell.png" class="h-8" alt="Asia">
-                <i class="fas fa-credit-card text-3xl"></i>
+            <p class="text-gray-500 text-[10px] mb-6 uppercase tracking-widest font-bold">طرق الدفع المدعومة</p>
+            <div class="flex justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Zain_Logo.svg" class="h-6" alt="Zain">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Asiacell_logo.png" class="h-6" alt="Asia">
+                <i class="fas fa-credit-card text-2xl text-white"></i>
             </div>
         </div>
-        <div class="text-center mt-8 space-y-2">
-            <p class="text-gray-700 text-[10px] font-bold">NSxIRAQ-STOR v2.0 - Developed by Ahmed Safi</p>
-            <p class="text-gray-800 text-[9px]">Artificial Intelligence Engineering Student - Tikrit University</p>
+        <div class="text-center mt-8">
+            <p class="text-gray-700 text-[10px] font-bold">NSxIRAQ-STOR v2.1 | أحمد صافي أسود</p>
+            <p class="text-gray-800 text-[9px]">Artificial Intelligence Engineering | Tikrit University</p>
         </div>
     </footer>
 
     <script>
         const packs = [
-            { uc: "60 UC", price: "1,250 IQD" },
-            { uc: "325 UC", price: "6,500 IQD" },
-            { uc: "660 UC", price: "13,000 IQD" },
-            { uc: "1800 UC", price: "32,500 IQD" },
-            { uc: "3850 UC", price: "65,000 IQD" },
-            { uc: "8100 UC", price: "130,000 IQD" }
+            { uc: "60 UC", price: "1,250 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/1.png" },
+            { uc: "325 UC", price: "6,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/2.png" },
+            { uc: "660 UC", price: "13,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/3.png" },
+            { uc: "1800 UC", price: "32,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/4.png" },
+            { uc: "3850 UC", price: "65,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/5.png" },
+            { uc: "8100 UC", price: "130,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/6.png" }
         ];
 
         let selected = null;
         const grid = document.getElementById('uc_grid');
 
-        packs.forEach((p, index) => {
+        packs.forEach((p) => {
             const btn = document.createElement('div');
             btn.className = "bg-[#1e2124] border border-[#2d3135] rounded-2xl p-5 text-center cursor-pointer hover:border-[#ffbe00]/50 transition-all group";
             btn.onclick = () => {
-                document.querySelectorAll('#uc_grid > div').forEach(d => d.style.borderColor = '#2d3135');
+                document.querySelectorAll('#uc_grid > div').forEach(d => {
+                    d.style.borderColor = '#2d3135';
+                    d.style.backgroundColor = '#1e2124';
+                });
                 btn.style.borderColor = '#ffbe00';
+                btn.style.backgroundColor = 'rgba(255, 190, 0, 0.05)';
                 selected = p;
             };
             btn.innerHTML = `
-                <img src="https://i.ibb.co/L8Nf8pY/uc-coin.png" class="w-8 h-8 mx-auto mb-3 opacity-80 group-hover:scale-110 transition-transform">
-                <div class="font-black text-lg">${p.uc}</div>
+                <img src="${p.img}" class="w-10 h-10 mx-auto mb-3 group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/40/ffbe00/000000?text=UC'">
+                <div class="font-black text-white text-lg">${p.uc}</div>
                 <div class="text-[#ffbe00] text-[10px] font-bold mt-1">${p.price}</div>
             `;
             grid.appendChild(btn);
@@ -89,8 +95,11 @@
 
         function sendOrder() {
             const id = document.getElementById('p_id').value;
-            if(!id || !selected) return alert("أكمل البيانات أولاً يا بطل!");
-            const msg = `طلب شحن جديد:%0Aالـ ID: ${id}%0Aالباقة: ${selected.uc}%0Aالسعر: ${selected.price}`;
+            if(!id || !selected) {
+                alert("يرجى إدخال المعرف واختيار الباقة!");
+                return;
+            }
+            const msg = `طلب شحن جديد من NSxIRAQ-STOR%0A--------------------%0Aالـ ID: ${id}%0Aالباقة: ${selected.uc}%0Aالسعر: ${selected.price}`;
             window.open(`https://wa.me/9647701721558?text=${msg}`);
         }
     </script>
