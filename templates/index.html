@@ -3,99 +3,77 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSxIRAQ-STOR | متجر الشحن</title>
-
+    <title>NSxIRAQ-STOR | شحن ببجي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <script>
-        // تخصيص الألوان لتناسب هوية NSxIRAQ
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#ffbe00', // اللون الذهبي
-                        darkBg: '#0c0d0e',
-                        cardBg: '#1a1c1f',
-                        border: '#2d2f33',
-                    }
-                }
-            }
+            theme: { extend: { colors: { primary: '#ffbe00', darkBg: '#0c0d0e', cardBg: '#1a1c1f', border: '#2d2f33' } } }
         }
     </script>
 </head>
-<body class="bg-darkBg text-white font-sans min-h-screen">
+<body class="bg-darkBg text-white min-h-screen font-sans">
 
     <div class="max-w-md mx-auto px-4 py-10">
-        
         <header class="text-center mb-10">
-            <h1 class="text-4xl font-black text-primary uppercase tracking-tighter">NSxIRAQ-STOR</h1>
-            <p class="text-gray-500 text-sm mt-2">نظام الشحن التلقائي - العراق 🇮🇶</p>
+            <h1 class="text-4xl font-black text-primary tracking-tighter">NSxIRAQ-STOR</h1>
+            <p class="text-gray-500 text-sm mt-2">أسرع خدمة شحن في العراق 🇮🇶</p>
         </header>
 
-        <div class="bg-cardBg border border-border rounded-3xl p-6 mb-8 shadow-xl">
-            <img src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png" class="w-40 mx-auto mb-6">
+        <div class="bg-cardBg border border-border rounded-3xl p-6 mb-8 shadow-2xl text-center">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/PUBG_Mobile_Logo.png" 
+                 class="w-40 mx-auto mb-6 drop-shadow-[0_0_10px_rgba(255,190,0,0.3)]" alt="PUBG">
             
-            <div class="space-y-2">
-                <label class="block text-right text-gray-400 text-sm mr-1">
-                    <i class="fas fa-fingerprint ml-1 text-primary"></i> معرف اللاعب (ID)
-                </label>
-                <input type="number" id="user_id" placeholder="123456789" 
-                    class="w-full bg-[#25272b] border border-border rounded-2xl py-4 text-center text-2xl font-bold focus:outline-none focus:border-primary transition-all">
+            <div class="text-right">
+                <label class="block text-gray-400 text-sm mb-2 mr-1">أدخل الـ ID الخاص بك لبدء الشحن</label>
+                <input type="number" id="p_id" placeholder="ID اللاعب" 
+                       class="w-full bg-[#25272b] border border-border rounded-2xl py-4 text-center text-2xl focus:outline-none focus:border-primary transition-all">
             </div>
         </div>
 
         <h3 class="text-right text-primary font-bold mb-4 mr-2">اختر كمية الـ UC:</h3>
-        <div class="grid grid-cols-2 gap-3 mb-8" id="packages_grid">
-            </div>
+        <div class="grid grid-cols-2 gap-3 mb-8" id="uc_grid"></div>
 
-        <button onclick="checkAndPay()" class="w-full bg-primary text-black font-black text-xl py-5 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20">
+        <button onclick="sendOrder()" class="w-full bg-primary text-black font-black text-xl py-5 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all">
             <i class="fas fa-bolt ml-2"></i> اشحن الآن
         </button>
-
-        <footer class="mt-20 text-center border-t border-border pt-10 text-gray-600 text-xs">
-            <p>© 2026 جميع الحقوق محفوظة لـ NSxIRAQ-STOR</p>
-        </footer>
     </div>
 
     <script>
-        // مصفوفة البيانات (بدل الملفات الخارجية لضمان السرعة)
         const packs = [
-            { id: 1, amount: "60 UC", price: "1,250 IQD" },
-            { id: 2, amount: "325 UC", price: "6,500 IQD" },
-            { id: 3, amount: "660 UC", price: "13,000 IQD" },
-            { id: 4, amount: "1800 UC", price: "32,500 IQD" },
-            { id: 5, amount: "3850 UC", price: "65,000 IQD" },
-            { id: 6, amount: "8100 UC", price: "130,000 IQD" }
+            { id: 1, uc: "60 UC", price: "1,250 IQD" },
+            { id: 2, uc: "325 UC", price: "6,500 IQD" },
+            { id: 3, uc: "660 UC", price: "13,000 IQD" },
+            { id: 4, uc: "1800 UC", price: "32,500 IQD" },
+            { id: 5, uc: "3850 UC", price: "65,000 IQD" },
+            { id: 6, uc: "8100 UC", price: "130,000 IQD" }
         ];
 
-        let selected = null;
+        let selectedPack = null;
+        const grid = document.getElementById('uc_grid');
 
-        // بناء القائمة برمجياً
-        const grid = document.getElementById('packages_grid');
         packs.forEach(p => {
-            const item = document.createElement('div');
-            item.className = "bg-cardBg border border-border rounded-2xl p-4 text-center cursor-pointer hover:border-gray-500 transition-all";
-            item.id = "p-" + p.id;
-            item.onclick = () => {
-                document.querySelectorAll('#packages_grid div').forEach(d => d.style.borderColor = '#2d2f33');
-                item.style.borderColor = '#ffbe00';
-                selected = p;
+            const card = document.createElement('div');
+            card.className = "bg-cardBg border border-border rounded-2xl p-4 text-center cursor-pointer transition-all hover:border-gray-500";
+            card.id = `card-${p.id}`;
+            card.onclick = () => {
+                document.querySelectorAll('#uc_grid > div').forEach(d => d.style.borderColor = '#2d2f33');
+                card.style.borderColor = '#ffbe00';
+                selectedPack = p;
             };
-            item.innerHTML = `
-                <img src="https://cdn.midasbuy.com/images/apps/pubgm/158x158.png" class="w-10 mx-auto mb-2">
-                <div class="font-bold text-white">${p.amount}</div>
+            // رابط صورة عملة الـ UC الموثوق
+            card.innerHTML = `
+                <img src="https://www.pubgmobile.com/common/images/icon_uc.png" class="w-10 mx-auto mb-2">
+                <div class="font-bold text-lg">${p.uc}</div>
                 <div class="text-primary text-xs">${p.price}</div>
             `;
-            grid.appendChild(item);
+            grid.appendChild(card);
         });
 
-        function checkAndPay() {
-            const id = document.getElementById('user_id').value;
-            if(!id) { alert("اكتب الـ ID أولاً يا بطل!"); return; }
-            if(!selected) { alert("اختر كمية الشحن!"); return; }
-            alert("سيتم تحويلك للدفع مقابل " + selected.amount + " للحساب " + id);
+        function sendOrder() {
+            const id = document.getElementById('p_id').value;
+            if(!id || !selectedPack) return alert("تأكد من إدخال الـ ID واختيار الباقة!");
+            alert("تم استلام طلبك لـ " + selectedPack.uc);
         }
     </script>
 </body>
