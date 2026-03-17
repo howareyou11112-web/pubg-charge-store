@@ -3,129 +3,99 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSxIRAQ-STOR | شحن ببجي موبايل</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>NSxIRAQ-STOR | متجر الشحن</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
-        // إعدادات Tailwind لتطابق تصميمك
+        // تخصيص الألوان لتناسب هوية NSxIRAQ
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#ffbe00',
-                        background: '#0c0d0e',
-                        card: '#1a1c1f',
+                        primary: '#ffbe00', // اللون الذهبي
+                        darkBg: '#0c0d0e',
+                        cardBg: '#1a1c1f',
                         border: '#2d2f33',
-                        secondary: '#222529',
-                        foreground: '#ffffff',
-                        'muted-foreground': '#888888',
                     }
                 }
             }
         }
     </script>
-    <style>
-        body { background-color: #0c0d0e; }
-        .selected-pkg { border-color: #ffbe00 !important; background-color: #222529 !important; box-shadow: 0 10px 15px -3px rgba(255, 190, 0, 0.1); }
-    </style>
 </head>
-<body class="min-h-screen text-foreground font-sans">
+<body class="bg-darkBg text-white font-sans min-h-screen">
 
-    <div class="max-w-lg mx-auto px-4 py-6">
-
-        <header class="text-center py-8">
-            <h1 class="text-4xl font-black text-primary tracking-wide">NSxIRAQ-STOR</h1>
-            <p class="text-muted-foreground mt-2 text-sm">أسرع شحن في العراق 🇮🇶</p>
+    <div class="max-w-md mx-auto px-4 py-10">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-black text-primary uppercase tracking-tighter">NSxIRAQ-STOR</h1>
+            <p class="text-gray-500 text-sm mt-2">نظام الشحن التلقائي - العراق 🇮🇶</p>
         </header>
 
-        <div class="bg-card border border-border rounded-2xl p-6 mb-6 text-center shadow-2xl">
-            <img
-                src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png"
-                alt="PUBG Mobile"
-                class="w-44 mx-auto mb-5 object-contain"
-                onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/PUBG_MOBILE.png/320px-PUBG_MOBILE.png'"
-            />
-
-            <div class="text-right">
-                <label class="block text-muted-foreground text-sm mb-2">
-                    <i class="fa fa-user ml-1"></i> معرف اللاعب (ID)
+        <div class="bg-cardBg border border-border rounded-3xl p-6 mb-8 shadow-xl">
+            <img src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png" class="w-40 mx-auto mb-6">
+            
+            <div class="space-y-2">
+                <label class="block text-right text-gray-400 text-sm mr-1">
+                    <i class="fas fa-fingerprint ml-1 text-primary"></i> معرف اللاعب (ID)
                 </label>
-                <input
-                    type="number"
-                    id="playerId"
-                    placeholder="أدخل الـ ID الخاص بك"
-                    class="w-full px-4 py-4 bg-[#25272b] border border-border rounded-xl text-foreground text-lg text-center placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                />
+                <input type="number" id="user_id" placeholder="123456789" 
+                    class="w-full bg-[#25272b] border border-border rounded-2xl py-4 text-center text-2xl font-bold focus:outline-none focus:border-primary transition-all">
             </div>
         </div>
 
-        <h2 class="text-right text-primary font-bold text-lg mb-4">
-            اختر كمية الشحن المطلوبة:
-        </h2>
-
-        <div class="grid grid-cols-2 gap-3 mb-6" id="ucGrid">
+        <h3 class="text-right text-primary font-bold mb-4 mr-2">اختر كمية الـ UC:</h3>
+        <div class="grid grid-cols-2 gap-3 mb-8" id="packages_grid">
             </div>
 
-        <button
-            onclick="handleCharge()"
-            class="w-full bg-primary text-black font-black text-xl py-5 rounded-xl hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg shadow-primary/20"
-        >
-            ⚡ اشحن الآن
+        <button onclick="checkAndPay()" class="w-full bg-primary text-black font-black text-xl py-5 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20">
+            <i class="fas fa-bolt ml-2"></i> اشحن الآن
         </button>
 
-        <footer class="mt-12 pt-6 border-t border-border text-muted-foreground text-xs text-center leading-loose">
-            <p>حقوق النشر © 2026 NSxIRAQ-STOR. جميع الحقوق محفوظة.</p>
-            <p>المتجر رقم 1 في العراق لتزويد خدمات الألعاب الرقمية.</p>
+        <footer class="mt-20 text-center border-t border-border pt-10 text-gray-600 text-xs">
+            <p>© 2026 جميع الحقوق محفوظة لـ NSxIRAQ-STOR</p>
         </footer>
-
     </div>
 
     <script>
-        const ucPackages = [
+        // مصفوفة البيانات (بدل الملفات الخارجية لضمان السرعة)
+        const packs = [
             { id: 1, amount: "60 UC", price: "1,250 IQD" },
             { id: 2, amount: "325 UC", price: "6,500 IQD" },
             { id: 3, amount: "660 UC", price: "13,000 IQD" },
             { id: 4, amount: "1800 UC", price: "32,500 IQD" },
             { id: 5, amount: "3850 UC", price: "65,000 IQD" },
-            { id: 6, amount: "8100 UC", price: "130,000 IQD" },
+            { id: 6, amount: "8100 UC", price: "130,000 IQD" }
         ];
 
-        let selectedId = null;
+        let selected = null;
 
-        // توليد البطاقات
-        const grid = document.getElementById('ucGrid');
-        ucPackages.forEach(pkg => {
-            const div = document.createElement('div');
-            div.className = `bg-card border border-border rounded-xl p-4 cursor-pointer transition-all duration-200 text-center hover:border-primary hover:bg-secondary`;
-            div.id = `pkg-${pkg.id}`;
-            div.onclick = () => selectPackage(pkg.id);
-            div.innerHTML = `
-                <img src="https://cdn.midasbuy.com/images/apps/pubgm/158x158.png" alt="UC" class="w-12 h-12 mx-auto mb-2 object-contain">
-                <span class="block font-bold text-base text-white">${pkg.amount}</span>
-                <span class="text-primary text-sm font-medium">${pkg.price}</span>
+        // بناء القائمة برمجياً
+        const grid = document.getElementById('packages_grid');
+        packs.forEach(p => {
+            const item = document.createElement('div');
+            item.className = "bg-cardBg border border-border rounded-2xl p-4 text-center cursor-pointer hover:border-gray-500 transition-all";
+            item.id = "p-" + p.id;
+            item.onclick = () => {
+                document.querySelectorAll('#packages_grid div').forEach(d => d.style.borderColor = '#2d2f33');
+                item.style.borderColor = '#ffbe00';
+                selected = p;
+            };
+            item.innerHTML = `
+                <img src="https://cdn.midasbuy.com/images/apps/pubgm/158x158.png" class="w-10 mx-auto mb-2">
+                <div class="font-bold text-white">${p.amount}</div>
+                <div class="text-primary text-xs">${p.price}</div>
             `;
-            grid.appendChild(div);
+            grid.appendChild(item);
         });
 
-        function selectPackage(id) {
-            selectedId = id;
-            // إزالة التحديد من الكل
-            document.querySelectorAll('#ucGrid > div').forEach(el => el.classList.remove('selected-pkg'));
-            // إضافة التحديد للبطاقة المختارة
-            document.getElementById(`pkg-${id}`).classList.add('selected-pkg');
-        }
-
-        function handleCharge() {
-            const playerId = document.getElementById('playerId').value;
-            if (!playerId) {
-                alert("يرجى إدخال ID اللاعب أولاً!");
-                return;
-            }
-            if (!selectedId) {
-                alert("يرجى اختيار كمية الشحن أولاً!");
-                return;
-            }
-            alert("جاري تحويلك لبوابة الدفع في العراق للحساب: " + playerId);
+        function checkAndPay() {
+            const id = document.getElementById('user_id').value;
+            if(!id) { alert("اكتب الـ ID أولاً يا بطل!"); return; }
+            if(!selected) { alert("اختر كمية الشحن!"); return; }
+            alert("سيتم تحويلك للدفع مقابل " + selected.amount + " للحساب " + id);
         }
     </script>
 </body>
