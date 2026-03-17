@@ -1,111 +1,132 @@
-import { useState } from "react";
-import ucCoin from "@/assets/uc-coin.png";
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSxIRAQ-STOR | شحن ببجي موبايل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // إعدادات Tailwind لتطابق تصميمك
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffbe00',
+                        background: '#0c0d0e',
+                        card: '#1a1c1f',
+                        border: '#2d2f33',
+                        secondary: '#222529',
+                        foreground: '#ffffff',
+                        'muted-foreground': '#888888',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0c0d0e; }
+        .selected-pkg { border-color: #ffbe00 !important; background-color: #222529 !important; box-shadow: 0 10px 15px -3px rgba(255, 190, 0, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen text-foreground font-sans">
 
-const ucPackages = [
-  { id: 1, amount: "60 UC", price: "1,250 IQD", img: ucCoin },
-  { id: 2, amount: "325 UC", price: "6,500 IQD", img: ucCoin },
-  { id: 3, amount: "660 UC", price: "13,000 IQD", img: ucCoin },
-  { id: 4, amount: "1800 UC", price: "32,500 IQD", img: ucCoin },
-  { id: 5, amount: "3850 UC", price: "65,000 IQD", img: ucCoin },
-  { id: 6, amount: "8100 UC", price: "130,000 IQD", img: ucCoin },
-];
+    <div class="max-w-lg mx-auto px-4 py-6">
 
-const Index = () => {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [playerId, setPlayerId] = useState("");
-
-  const handleCharge = () => {
-    if (!playerId.trim()) {
-      alert("يرجى إدخال ID اللاعب أولاً!");
-      return;
-    }
-    if (!selectedId) {
-      alert("يرجى اختيار كمية الشحن أولاً!");
-      return;
-    }
-    alert("جاري تحويلك لبوابة الدفع في العراق...");
-  };
-
-  return (
-    <div dir="rtl" className="min-h-screen bg-background text-foreground">
-      <div className="max-w-lg mx-auto px-4 py-6">
-
-        {/* Header */}
-        <header className="text-center py-8">
-          <h1 className="text-4xl font-black text-primary tracking-wide">NSxIRAQ-STOR</h1>
-          <p className="text-muted-foreground mt-2 text-sm">أسرع شحن في العراق 🇮🇶</p>
+        <header class="text-center py-8">
+            <h1 class="text-4xl font-black text-primary tracking-wide">NSxIRAQ-STOR</h1>
+            <p class="text-muted-foreground mt-2 text-sm">أسرع شحن في العراق 🇮🇶</p>
         </header>
 
-        {/* Hero Card */}
-        <div className="bg-card border border-border rounded-2xl p-6 mb-6 text-center">
-          <img
-            src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png"
-            alt="PUBG Mobile"
-            className="w-44 mx-auto mb-5 object-contain"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src =
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/PUBG_MOBILE.png/320px-PUBG_MOBILE.png";
-            }}
-          />
-
-          <div className="text-right">
-            <label className="block text-muted-foreground text-sm mb-2">
-              <i className="fa fa-user ml-1" /> معرف اللاعب (ID)
-            </label>
-            <input
-              type="number"
-              value={playerId}
-              onChange={(e) => setPlayerId(e.target.value)}
-              placeholder="أدخل الـ ID الخاص بك"
-              className="w-full px-4 py-4 bg-input border border-border rounded-xl text-foreground text-lg text-center placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+        <div class="bg-card border border-border rounded-2xl p-6 mb-6 text-center shadow-2xl">
+            <img
+                src="https://www.pngarts.com/files/10/PUBG-Mobile-Logo-PNG-Image.png"
+                alt="PUBG Mobile"
+                class="w-44 mx-auto mb-5 object-contain"
+                onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/PUBG_MOBILE.png/320px-PUBG_MOBILE.png'"
             />
-          </div>
+
+            <div class="text-right">
+                <label class="block text-muted-foreground text-sm mb-2">
+                    <i class="fa fa-user ml-1"></i> معرف اللاعب (ID)
+                </label>
+                <input
+                    type="number"
+                    id="playerId"
+                    placeholder="أدخل الـ ID الخاص بك"
+                    class="w-full px-4 py-4 bg-[#25272b] border border-border rounded-xl text-foreground text-lg text-center placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                />
+            </div>
         </div>
 
-        {/* UC Section */}
-        <h2 className="text-right text-primary font-bold text-lg mb-4">
-          اختر كمية الشحن المطلوبة:
+        <h2 class="text-right text-primary font-bold text-lg mb-4">
+            اختر كمية الشحن المطلوبة:
         </h2>
 
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          {ucPackages.map((pkg) => (
-            <div
-              key={pkg.id}
-              onClick={() => setSelectedId(pkg.id)}
-              className={`bg-card border rounded-xl p-4 cursor-pointer transition-all duration-200 text-center hover:border-primary hover:bg-secondary ${
-                selectedId === pkg.id
-                  ? "border-primary bg-secondary shadow-lg shadow-primary/10"
-                  : "border-border"
-              }`}
-            >
-              <img
-                src={pkg.img}
-                alt="UC"
-                className="w-12 h-12 mx-auto mb-2 object-contain"
-              />
-              <span className="block font-bold text-base text-foreground">{pkg.amount}</span>
-              <span className="text-primary text-sm font-medium">{pkg.price}</span>
+        <div class="grid grid-cols-2 gap-3 mb-6" id="ucGrid">
             </div>
-          ))}
-        </div>
 
-        {/* Pay Button */}
         <button
-          onClick={handleCharge}
-          className="w-full bg-primary text-primary-foreground font-black text-xl py-5 rounded-xl hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg shadow-primary/20"
+            onclick="handleCharge()"
+            class="w-full bg-primary text-black font-black text-xl py-5 rounded-xl hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg shadow-primary/20"
         >
-          ⚡ اشحن الآن
+            ⚡ اشحن الآن
         </button>
 
-        {/* Footer */}
-        <footer className="mt-12 pt-6 border-t border-border text-muted-foreground text-xs text-center leading-loose">
-          <p>حقوق النشر © 2026 NSxIRAQ-STOR. جميع الحقوق محفوظة.</p>
-          <p>المتجر رقم 1 في العراق لتزويد خدمات الألعاب الرقمية.</p>
+        <footer class="mt-12 pt-6 border-t border-border text-muted-foreground text-xs text-center leading-loose">
+            <p>حقوق النشر © 2026 NSxIRAQ-STOR. جميع الحقوق محفوظة.</p>
+            <p>المتجر رقم 1 في العراق لتزويد خدمات الألعاب الرقمية.</p>
         </footer>
 
-      </div>
     </div>
-  );
-};
 
-export default Index;
+    <script>
+        const ucPackages = [
+            { id: 1, amount: "60 UC", price: "1,250 IQD" },
+            { id: 2, amount: "325 UC", price: "6,500 IQD" },
+            { id: 3, amount: "660 UC", price: "13,000 IQD" },
+            { id: 4, amount: "1800 UC", price: "32,500 IQD" },
+            { id: 5, amount: "3850 UC", price: "65,000 IQD" },
+            { id: 6, amount: "8100 UC", price: "130,000 IQD" },
+        ];
+
+        let selectedId = null;
+
+        // توليد البطاقات
+        const grid = document.getElementById('ucGrid');
+        ucPackages.forEach(pkg => {
+            const div = document.createElement('div');
+            div.className = `bg-card border border-border rounded-xl p-4 cursor-pointer transition-all duration-200 text-center hover:border-primary hover:bg-secondary`;
+            div.id = `pkg-${pkg.id}`;
+            div.onclick = () => selectPackage(pkg.id);
+            div.innerHTML = `
+                <img src="https://cdn.midasbuy.com/images/apps/pubgm/158x158.png" alt="UC" class="w-12 h-12 mx-auto mb-2 object-contain">
+                <span class="block font-bold text-base text-white">${pkg.amount}</span>
+                <span class="text-primary text-sm font-medium">${pkg.price}</span>
+            `;
+            grid.appendChild(div);
+        });
+
+        function selectPackage(id) {
+            selectedId = id;
+            // إزالة التحديد من الكل
+            document.querySelectorAll('#ucGrid > div').forEach(el => el.classList.remove('selected-pkg'));
+            // إضافة التحديد للبطاقة المختارة
+            document.getElementById(`pkg-${id}`).classList.add('selected-pkg');
+        }
+
+        function handleCharge() {
+            const playerId = document.getElementById('playerId').value;
+            if (!playerId) {
+                alert("يرجى إدخال ID اللاعب أولاً!");
+                return;
+            }
+            if (!selectedId) {
+                alert("يرجى اختيار كمية الشحن أولاً!");
+                return;
+            }
+            alert("جاري تحويلك لبوابة الدفع في العراق للحساب: " + playerId);
+        }
+    </script>
+</body>
+</html>
