@@ -1,146 +1,82 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSxIRAQ-STOR | المنصة الرسمية لشحن الألعاب</title>
+    <title>NSxIRAQ-STOR | شحن شدات ببجي الرسمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: { extend: { colors: { primary: '#ffbe00', darkBg: '#0a0b0c', cardBg: '#16181b', border: '#2d2f33' } } }
-        }
-    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { font-family: 'Cairo', sans-serif; background-color: #0a0b0c; color: white; }
-        .glass { background: rgba(22, 24, 27, 0.8); backdrop-filter: blur(10px); }
-        .nav-link:hover { color: #ffbe00; border-bottom: 2px solid #ffbe00; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #0f1113; color: white; margin: 0; }
+        .text-primary { color: #ffbe00; }
+        .bg-primary { background-color: #ffbe00; }
+        .border-border { border-color: #2d3135; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col items-center p-4">
 
-    <nav class="glass sticky top-0 z-50 border-b border-border px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-black text-primary tracking-tighter">NSxIRAQ</div>
-        <div class="hidden md:flex space-x-reverse space-x-6 text-sm font-bold">
-            <a href="#" class="nav-link transition-all">الرئيسية</a>
-            <a href="#" class="nav-link transition-all">خدماتنا</a>
-            <a href="#" class="nav-link transition-all">من نحن</a>
-            <a href="#" class="nav-link transition-all text-primary">تواصل معنا</a>
+    <header class="w-full max-w-md text-center py-8">
+        <div class="w-20 h-20 bg-primary rounded-3xl mx-auto flex items-center justify-center shadow-[0_0_30px_rgba(255,190,0,0.3)] mb-4">
+            <span class="text-black text-3xl font-black">NS</span>
         </div>
-        <div class="md:hidden"><i class="fas fa-bars"></i></div>
-    </nav>
+        <h1 class="text-2xl font-black tracking-tight">NSxIRAQ-STOR</h1>
+        <p class="text-gray-500 text-sm mt-1">المتجر الرسمي لشحن الألعاب في العراق</p>
+    </header>
 
-    <div class="max-w-4xl mx-auto px-4 py-12">
+    <main class="w-full max-w-md bg-[#16181b] border border-border rounded-[2.5rem] p-6 shadow-2xl">
         
-        <header class="text-center mb-16">
-            <div class="inline-block px-4 py-1 border border-primary/30 rounded-full text-xs text-primary mb-4 bg-primary/5">
-                <i class="fas fa-check-circle ml-1"></i> موزع معتمد قيد المراجعة
-            </div>
-            <h1 class="text-5xl font-black mb-4 uppercase">استمتع بتجربة شحن <span class="text-primary">فورية</span></h1>
-            <p class="text-gray-400 max-w-lg mx-auto leading-relaxed">الخيار الأول للاعبين في العراق. شحن آمن، سريع، وبأفضل الأسعار التنافسية لجميع الألعاب العالمية.</p>
-        </header>
-
-        <div class="grid md:grid-cols-2 gap-10 items-start">
-            
-            <div class="bg-cardBg border border-border rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-                
-                <h3 class="text-xl font-bold mb-6 flex items-center">
-                    <span class="w-2 h-8 bg-primary ml-3 rounded-full"></span>
-                    نموذج الطلب السريع
-                </h3>
-
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-3 mr-2 font-bold uppercase tracking-widest">المعرف الخاص باللاعب (ID)</label>
-                        <div class="relative">
-                            <i class="fas fa-id-card absolute right-4 top-1/2 -translate-y-1/2 text-primary"></i>
-                            <input type="number" id="p_id" placeholder="مثال: 51234567" 
-                                class="w-full bg-[#1e2124] border border-border rounded-2xl py-5 pr-12 text-left text-xl font-bold focus:outline-none focus:border-primary transition-all placeholder:text-gray-700">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-3 mr-2 font-bold uppercase tracking-widest text-right">اختر كمية الشدات</label>
-                        <div class="grid grid-cols-2 gap-3" id="uc_grid"></div>
-                    </div>
-
-                    <button onclick="sendOrder()" class="w-full bg-primary text-black font-black text-xl py-5 rounded-2xl hover:shadow-[0_10px_30px_rgba(255,190,0,0.3)] transition-all flex justify-center items-center group">
-                        <span>إتمام الطلب الآن</span>
-                        <i class="fas fa-arrow-left mr-3 group-hover:-translate-x-2 transition-transform"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex items-start">
-                    <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center text-primary ml-4 shrink-0">
-                        <i class="fas fa-bolt text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg">سرعة فائقة</h4>
-                        <p class="text-gray-500 text-sm">يتم معالجة طلبك خلال أقل من 60 ثانية من تأكيد الدفع.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex items-start">
-                    <div class="w-12 h-12 bg-green-500/20 rounded-2xl flex items-center justify-center text-green-500 ml-4 shrink-0">
-                        <i class="fas fa-shield-alt text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg">أمان 100%</h4>
-                        <p class="text-gray-500 text-sm">نستخدم بروتوكولات تشفير عالمية لضمان حماية بياناتك.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex items-start">
-                    <div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500 ml-4 shrink-0">
-                        <i class="fas fa-headset text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg">دعم فني 24/7</h4>
-                        <p class="text-gray-500 text-sm">فريقنا متواجد دائماً لمساعدتك في أي استفسار.</p>
-                    </div>
-                </div>
+        <div class="mb-8">
+            <label class="block text-xs font-bold text-gray-500 mb-3 uppercase mr-2">أدخل معرف اللاعب (Player ID)</label>
+            <div class="relative">
+                <input type="number" id="p_id" placeholder="مثال: 5123456789" 
+                    class="w-full bg-[#1e2124] border border-border rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-primary transition-all font-bold text-right">
+                <i class="fas fa-id-badge absolute left-5 top-1/2 -translate-y-1/2 text-gray-600"></i>
             </div>
         </div>
 
-        <footer class="mt-24 pt-12 border-t border-border">
-            <div class="grid md:grid-cols-3 gap-10 mb-12">
-                <div>
-                    <h5 class="text-primary font-black mb-4">NSxIRAQ-STOR</h5>
-                    <p class="text-gray-500 text-sm">المنصة الرائدة في العراق لتجارة البطاقات الرقمية وشحن الألعاب المباشر.</p>
+        <div class="mb-8">
+            <label class="block text-xs font-bold text-gray-500 mb-3 uppercase mr-2">اختر باقة الشحن</label>
+            <div id="uc_grid" class="grid grid-cols-2 gap-3">
                 </div>
-                <div>
-                    <h5 class="text-white font-bold mb-4">روابط سريعة</h5>
-                    <ul class="text-gray-500 text-sm space-y-2 font-bold">
-                        <li><a href="#" class="hover:text-primary">سياسة الخصوصية</a></li>
-                        <li><a href="#" class="hover:text-primary">شروط الخدمة</a></li>
-                        <li><a href="#" class="hover:text-primary">الأسئلة الشائعة</a></li>
-                    </ul>
+        </div>
+
+        <button onclick="sendOrder()" class="w-full bg-primary hover:bg-[#e6ab00] text-black font-black py-5 rounded-2xl transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(255,190,0,0.2)] flex items-center justify-center gap-2">
+            <span>إتمام الطلب عبر واتساب</span>
+            <i class="fab fa-whatsapp text-xl"></i>
+        </button>
+    </main>
+
+    <footer class="w-full max-w-md mt-10 mb-10">
+        <div class="p-6 bg-[#16181b] border border-border rounded-[2rem] text-center">
+            <p class="text-gray-500 text-[10px] mb-4 uppercase tracking-[0.2em] font-bold">طرق الدفع المحلية المدعومة</p>
+            <div class="flex justify-center gap-6 opacity-80">
+                <div class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Zain_Logo.svg" class="h-6 mb-1" alt="Zain">
+                    <span class="text-[8px] text-gray-600">Zain Cash</span>
                 </div>
-                <div class="text-left font-bold">
-                    <h5 class="text-white font-bold mb-4">تابعنا</h5>
-                    <div class="flex justify-end space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fab fa-whatsapp"></i></a>
-                    </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Asiacell_logo.png" class="h-6 mb-1" alt="Asiacell">
+                    <span class="text-[8px] text-gray-600">Asiacell</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-credit-card text-xl mb-1 text-gray-500"></i>
+                    <span class="text-[8px] text-gray-600">Qi Card</span>
                 </div>
             </div>
-            <p class="text-center text-gray-700 text-xs">© 2026 جميع الحقوق محفوظة لشركة NSxIRAQ-STOR المحدودة</p>
-        </footer>
-    </div>
+        </div>
+        <p class="text-center text-gray-700 text-[10px] mt-6">© 2026 NSxIRAQ-STOR | أحمد صافي أسود | جامعة تكريت - ذكاء اصطناعي</p>
+    </footer>
 
     <script>
         const packs = [
-            { id: 1, uc: "60 UC", price: "1,250 IQD" },
-            { id: 2, uc: "325 UC", price: "6,500 IQD" },
-            { id: 3, uc: "660 UC", price: "13,000 IQD" },
-            { id: 4, uc: "1800 UC", price: "32,500 IQD" },
-            { id: 5, uc: "3850 UC", price: "65,000 IQD" },
-            { id: 6, uc: "8100 UC", price: "130,000 IQD" }
+            { id: 1, uc: "60 UC", price: "1,250 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/1.png" },
+            { id: 2, uc: "325 UC", price: "6,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/2.png" },
+            { id: 3, uc: "660 UC", price: "13,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/3.png" },
+            { id: 4, uc: "1800 UC", price: "32,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/4.png" },
+            { id: 5, uc: "3850 UC", price: "65,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/5.png" },
+            { id: 6, uc: "8100 UC", price: "130,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/6.png" }
         ];
 
         let selectedPack = null;
@@ -148,28 +84,32 @@
 
         packs.forEach(p => {
             const card = document.createElement('div');
-            card.className = "bg-[#1e2124] border border-border rounded-2xl p-4 text-center cursor-pointer transition-all hover:scale-[1.03]";
-            card.id = `card-${p.id}`;
+            card.className = "bg-[#1e2124] border border-border rounded-2xl p-4 text-center cursor-pointer transition-all hover:scale-[1.03] group";
             card.onclick = () => {
                 document.querySelectorAll('#uc_grid > div').forEach(d => {
-                    d.style.borderColor = '#2d2f33';
-                    d.style.backgroundColor = '#1e2124';
+                    d.style.borderColor = '#2d3135';
+                    d.style.background = '#1e2124';
                 });
                 card.style.borderColor = '#ffbe00';
-                card.style.backgroundColor = '#25282c';
+                card.style.background = 'rgba(255, 190, 0, 0.05)';
                 selectedPack = p;
             };
             card.innerHTML = `
-                <div class="font-black text-lg text-white mb-1">${p.uc}</div>
-                <div class="text-primary text-xs font-bold">${p.price}</div>
+                <img src="${p.img}" class="w-10 h-10 mx-auto mb-2 group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/50/ffbe00/000000?text=UC'">
+                <div class="font-black text-white">${p.uc}</div>
+                <div class="text-primary text-[10px] font-bold">${p.price}</div>
             `;
             grid.appendChild(card);
         });
 
         function sendOrder() {
             const id = document.getElementById('p_id').value;
-            if(!id || !selectedPack) return alert("يرجى ملء البيانات أولاً!");
-            alert("شكراً لك! سيتم مراجعة طلبك لـ " + selectedPack.uc);
+            if(!id || !selectedPack) {
+                alert("يرجى إدخال الـ ID واختيار الباقة أولاً!");
+                return;
+            }
+            const message = `طلب شحن جديد من متجر NSxIRAQ-STOR%0A--------------------------%0Aالـ ID: ${id}%0Aالباقة: ${selectedPack.uc}%0Aالسعر: ${selectedPack.price}%0A--------------------------%0Aالمرسل: أحمد صافي أسود`;
+            window.open(`https://wa.me/9647701721558?text=${message}`, '_blank');
         }
     </script>
 </body>
