@@ -3,113 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSxIRAQ-STOR | شحن شدات ببجي الرسمي</title>
+    <title>NSxIRAQ-STOR | شحن ببجي الرسمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #0f1113; color: white; margin: 0; }
-        .text-primary { color: #ffbe00; }
-        .bg-primary { background-color: #ffbe00; }
-        .border-border { border-color: #2d3135; }
-        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #0d0f11; color: white; margin: 0; }
+        .card-shadow { shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .gradient-border { border: 1px solid rgba(255, 190, 0, 0.2); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4">
 
-    <header class="w-full max-w-md text-center py-8">
-        <div class="w-20 h-20 bg-primary rounded-3xl mx-auto flex items-center justify-center shadow-[0_0_30px_rgba(255,190,0,0.3)] mb-4">
-            <span class="text-black text-3xl font-black">NS</span>
+    <header class="w-full max-w-md text-center py-10">
+        <div class="w-24 h-24 bg-[#ffbe00] rounded-[2rem] mx-auto flex items-center justify-center shadow-[0_0_50px_rgba(255,190,0,0.2)] mb-4 animate-bounce">
+            <span class="text-black text-4xl font-black">NS</span>
         </div>
-        <h1 class="text-2xl font-black tracking-tight">NSxIRAQ-STOR</h1>
-        <p class="text-gray-500 text-sm mt-1">المتجر الرسمي لشحن الألعاب في العراق</p>
+        <h1 class="text-3xl font-black tracking-tight text-[#ffbe00]">NSxIRAQ-STOR</h1>
+        <p class="text-gray-400 text-sm mt-2 font-bold italic">Top-up Solutions for Iraqi Gamers</p>
     </header>
 
-    <main class="w-full max-w-md bg-[#16181b] border border-border rounded-[2.5rem] p-6 shadow-2xl">
+    <main class="w-full max-w-md bg-[#16181c] border border-white/5 rounded-[2.5rem] p-8 card-shadow">
         
         <div class="mb-8">
-            <label class="block text-xs font-bold text-gray-500 mb-3 uppercase mr-2">أدخل معرف اللاعب (Player ID)</label>
-            <div class="relative">
-                <input type="number" id="p_id" placeholder="مثال: 5123456789" 
-                    class="w-full bg-[#1e2124] border border-border rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-primary transition-all font-bold text-right">
-                <i class="fas fa-id-badge absolute left-5 top-1/2 -translate-y-1/2 text-gray-600"></i>
-            </div>
+            <label class="block text-[10px] font-bold text-gray-500 mb-3 uppercase tracking-widest mr-2">Player ID | معرف اللاعب</label>
+            <input type="number" id="p_id" placeholder="57546547547" 
+                class="w-full bg-[#1e2124] border border-[#2d3135] rounded-2xl py-5 px-6 text-white focus:outline-none focus:border-[#ffbe00] transition-all font-mono text-xl text-center">
         </div>
 
         <div class="mb-8">
-            <label class="block text-xs font-bold text-gray-500 mb-3 uppercase mr-2">اختر باقة الشحن</label>
-            <div id="uc_grid" class="grid grid-cols-2 gap-3">
+            <label class="block text-[10px] font-bold text-gray-500 mb-3 uppercase tracking-widest mr-2">Select UC Pack | اختر الباقة</label>
+            <div id="uc_grid" class="grid grid-cols-2 gap-4">
                 </div>
         </div>
 
-        <button onclick="sendOrder()" class="w-full bg-primary hover:bg-[#e6ab00] text-black font-black py-5 rounded-2xl transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(255,190,0,0.2)] flex items-center justify-center gap-2">
-            <span>إتمام الطلب عبر واتساب</span>
-            <i class="fab fa-whatsapp text-xl"></i>
+        <button onclick="sendOrder()" class="w-full bg-[#ffbe00] hover:bg-[#e6ab00] text-black font-black py-5 rounded-2xl transition-all transform active:scale-95 shadow-xl flex items-center justify-center gap-3">
+            <span class="text-lg">إرسال الطلب للمراجعة</span>
+            <i class="fab fa-whatsapp text-2xl"></i>
         </button>
     </main>
 
-    <footer class="w-full max-w-md mt-10 mb-10">
-        <div class="p-6 bg-[#16181b] border border-border rounded-[2rem] text-center">
-            <p class="text-gray-500 text-[10px] mb-4 uppercase tracking-[0.2em] font-bold">طرق الدفع المحلية المدعومة</p>
-            <div class="flex justify-center gap-6 opacity-80">
-                <div class="flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Zain_Logo.svg" class="h-6 mb-1" alt="Zain">
-                    <span class="text-[8px] text-gray-600">Zain Cash</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Asiacell_logo.png" class="h-6 mb-1" alt="Asiacell">
-                    <span class="text-[8px] text-gray-600">Asiacell</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <i class="fas fa-credit-card text-xl mb-1 text-gray-500"></i>
-                    <span class="text-[8px] text-gray-600">Qi Card</span>
-                </div>
+    <footer class="w-full max-w-md mt-12 mb-12">
+        <div class="p-8 bg-[#16181c]/50 rounded-[2.5rem] border border-white/5 text-center">
+            <p class="text-gray-500 text-[10px] mb-6 uppercase tracking-widest font-bold">الموزع المعتمد لوسائل الدفع</p>
+            <div class="flex justify-center gap-10 grayscale opacity-40">
+                <img src="https://i.ibb.co/h7rR3Xf/zain-cash.png" class="h-8" alt="Zain">
+                <img src="https://i.ibb.co/Qv4vG0Y/asiacell.png" class="h-8" alt="Asia">
+                <i class="fas fa-credit-card text-3xl"></i>
             </div>
         </div>
-        <p class="text-center text-gray-700 text-[10px] mt-6">© 2026 NSxIRAQ-STOR | أحمد صافي أسود | جامعة تكريت - ذكاء اصطناعي</p>
+        <div class="text-center mt-8 space-y-2">
+            <p class="text-gray-700 text-[10px] font-bold">NSxIRAQ-STOR v2.0 - Developed by Ahmed Safi</p>
+            <p class="text-gray-800 text-[9px]">Artificial Intelligence Engineering Student - Tikrit University</p>
+        </div>
     </footer>
 
     <script>
         const packs = [
-            { id: 1, uc: "60 UC", price: "1,250 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/1.png" },
-            { id: 2, uc: "325 UC", price: "6,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/2.png" },
-            { id: 3, uc: "660 UC", price: "13,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/3.png" },
-            { id: 4, uc: "1800 UC", price: "32,500 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/4.png" },
-            { id: 5, uc: "3850 UC", price: "65,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/5.png" },
-            { id: 6, uc: "8100 UC", price: "130,000 IQD", img: "https://www.midasbuy.com/static/images/items/pubgm/6.png" }
+            { uc: "60 UC", price: "1,250 IQD" },
+            { uc: "325 UC", price: "6,500 IQD" },
+            { uc: "660 UC", price: "13,000 IQD" },
+            { uc: "1800 UC", price: "32,500 IQD" },
+            { uc: "3850 UC", price: "65,000 IQD" },
+            { uc: "8100 UC", price: "130,000 IQD" }
         ];
 
-        let selectedPack = null;
+        let selected = null;
         const grid = document.getElementById('uc_grid');
 
-        packs.forEach(p => {
-            const card = document.createElement('div');
-            card.className = "bg-[#1e2124] border border-border rounded-2xl p-4 text-center cursor-pointer transition-all hover:scale-[1.03] group";
-            card.onclick = () => {
-                document.querySelectorAll('#uc_grid > div').forEach(d => {
-                    d.style.borderColor = '#2d3135';
-                    d.style.background = '#1e2124';
-                });
-                card.style.borderColor = '#ffbe00';
-                card.style.background = 'rgba(255, 190, 0, 0.05)';
-                selectedPack = p;
+        packs.forEach((p, index) => {
+            const btn = document.createElement('div');
+            btn.className = "bg-[#1e2124] border border-[#2d3135] rounded-2xl p-5 text-center cursor-pointer hover:border-[#ffbe00]/50 transition-all group";
+            btn.onclick = () => {
+                document.querySelectorAll('#uc_grid > div').forEach(d => d.style.borderColor = '#2d3135');
+                btn.style.borderColor = '#ffbe00';
+                selected = p;
             };
-            card.innerHTML = `
-                <img src="${p.img}" class="w-10 h-10 mx-auto mb-2 group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/50/ffbe00/000000?text=UC'">
-                <div class="font-black text-white">${p.uc}</div>
-                <div class="text-primary text-[10px] font-bold">${p.price}</div>
+            btn.innerHTML = `
+                <img src="https://i.ibb.co/L8Nf8pY/uc-coin.png" class="w-8 h-8 mx-auto mb-3 opacity-80 group-hover:scale-110 transition-transform">
+                <div class="font-black text-lg">${p.uc}</div>
+                <div class="text-[#ffbe00] text-[10px] font-bold mt-1">${p.price}</div>
             `;
-            grid.appendChild(card);
+            grid.appendChild(btn);
         });
 
         function sendOrder() {
             const id = document.getElementById('p_id').value;
-            if(!id || !selectedPack) {
-                alert("يرجى إدخال الـ ID واختيار الباقة أولاً!");
-                return;
-            }
-            const message = `طلب شحن جديد من متجر NSxIRAQ-STOR%0A--------------------------%0Aالـ ID: ${id}%0Aالباقة: ${selectedPack.uc}%0Aالسعر: ${selectedPack.price}%0A--------------------------%0Aالمرسل: أحمد صافي أسود`;
-            window.open(`https://wa.me/9647701721558?text=${message}`, '_blank');
+            if(!id || !selected) return alert("أكمل البيانات أولاً يا بطل!");
+            const msg = `طلب شحن جديد:%0Aالـ ID: ${id}%0Aالباقة: ${selected.uc}%0Aالسعر: ${selected.price}`;
+            window.open(`https://wa.me/9647701721558?text=${msg}`);
         }
     </script>
 </body>
